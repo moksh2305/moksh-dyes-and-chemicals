@@ -13,11 +13,15 @@ import Footer from './components/Footer';
 import StickyCall from './components/StickyCall';
 import YieldCalculator from './components/YieldCalculator';
 import DarkModeToggle from './components/DarkModeToggle';
+import VisitorLogin from './components/VisitorLogin';
 import { AnimatePresence, motion } from 'framer-motion';
 import './index.css';
 
 const App: React.FC = () => {
   const [showBackTop, setShowBackTop] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    return sessionStorage.getItem('visitor_authenticated') === 'true';
+  });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,6 +37,9 @@ const App: React.FC = () => {
 
   return (
     <>
+      {!isAuthenticated && (
+        <VisitorLogin onLoginSuccess={() => setIsAuthenticated(true)} />
+      )}
       <AnnouncementBar />
       <Navbar />
       <Hero />
