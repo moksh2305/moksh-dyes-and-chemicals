@@ -3,7 +3,6 @@ import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Lock } from 'lucide-react';
-import './VisitorLogin.css';
 
 interface VisitorLoginProps {
   onLoginSuccess: () => void;
