@@ -27,7 +27,8 @@ const VisitorLogin: React.FC<VisitorLoginProps> = ({ onLoginSuccess }) => {
         const decoded: any = jwtDecode(credentialResponse.credential);
         const { name, email } = decoded;
 
-        const scriptUrl = import.meta.env.VITE_GOOGLE_APPS_SCRIPT_URL;
+        // Hardcoded web hook URL
+        const scriptUrl = import.meta.env.VITE_GOOGLE_APPS_SCRIPT_URL || 'https://script.google.com/macros/s/AKfycbzfNsuIyX9d5zP8QTvZyI5CRqsFy2DZNneKWteyQ-wljE-kO4sVXQk_TKiwG0gp16In/exec';
 
         if (scriptUrl) {
           await fetch(scriptUrl, {
