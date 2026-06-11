@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ShoppingCart, X, MessageCircle } from 'lucide-react';
+import './ShoppingCart.css';
 
 const products = [
   { name: "Black BB", cat: "vat", color: "#1a1a2e", desc: "Deep jet black VAT dye with excellent wash and light fastness." },
@@ -56,12 +58,46 @@ const tagClasses: Record<string, string> = {
   base: "tag-base",
 };
 
+export interface CartItem {
+  product: typeof products[0];
+  quantity: string;
+}
+
 const ProductGrid: React.FC = () => {
   const [filter, setFilter] = useState('all');
+  const [cart, setCart] = useState<CartItem[]>([]);
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
   const filteredProducts = filter === 'all' 
     ? products 
     : products.filter(p => p.cat === filter);
+
+  const addToCart = (product: typeof products[0]) => {
+    if (!cart.find(item => item.product.name === product.name)) {
+      setCart([...cart, { product, quantity: '50 kg' }]);
+    }
+    setIsCartOpen(true);
+  };
+
+  const removeFromCart = (productName: string) => {
+    setCart(cart.filter(item => item.product.name !== productName));
+  };
+
+  const updateQuantity = (productName: string, quantity: string) => {
+    setCart(cart.map(item => 
+      item.product.name === productName ? { ...item, quantity } : item
+    ));
+  };
+
+  const generateWhatsAppLink = (phone: string) => {
+    let text = "Hello Chirag Shah! I would like to place an order inquiry for:\n\n";
+    cart.forEach(item => {
+      text += `- ${item.quantity} of ${item.product.name}\n`;
+    });
+    text += "\nPlease let me know your best pricing and availability.";
+    
+    return `https://wa.me/91${phone}?text=${encodeURIComponent(text)}`;
+  };
 
   return (
     <div id="products">
@@ -75,7 +111,7 @@ const ProductGrid: React.FC = () => {
         >
           <span className="eyebrow">Our Range</span>
           <h2>Product Collection</h2>
-          <p>Filter by dye category to explore our complete range</p>
+          <p>Filter by dye category and add products to your inquiry order</p>
         </motion.div>
 
         <div className="tabs">
@@ -105,12 +141,115 @@ const ProductGrid: React.FC = () => {
                   <div className="card-name">{p.name}</div>
                   <div className="card-hover-info">{p.desc}</div>
                   <span className={`card-tag ${tagClasses[p.cat]}`}>{tagLabels[p.cat]}</span>
+                  
+                  <button className="add-to-cart-btn" onClick={() => addToCart(p)}>
+                    + Add to Order
+                  </button>
                 </div>
               </motion.div>
             ))}
           </AnimatePresence>
         </motion.div>
       </div>
+
+      {/* Floating Cart Button */}
+      <AnimatePresence>
+        {cart.length > 0 && (
+          <motion.button 
+            className="cart-floating-btn"
+            onClick={() => setIsCartOpen(true)}
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0, opacity: 0 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <ShoppingCart size={20} />
+            <span>{cart.length} Items</span>
+          </motion.button>
+        )}
+      </AnimatePresence>
+
+      {/* Cart Sidebar */}
+      <AnimatePresence>
+        {isCartOpen && (
+          <>
+            <motion.div 
+              className="cart-overlay"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsCartOpen(false)}
+            />
+            <motion.div 
+              className="cart-sidebar"
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+            >
+              <div className="cart-header">
+                <h3>Order Inquiry</h3>
+                <button className="close-cart" onClick={() => setIsCartOpen(false)}>
+                  <X size={24} />
+                </button>
+              </div>
+
+              <div className="cart-items">
+                {cart.length === 0 ? (
+                  <div className="empty-cart">
+                    <p>Your order list is empty.</p>
+                  </div>
+                ) : (
+                  cart.map((item, idx) => (
+                    <div className="cart-item" key={idx}>
+                      <div className="cart-item-header">
+                        <span className="cart-item-name">{item.product.name}</span>
+                        <button className="remove-item" onClick={() => removeFromCart(item.product.name)}>Remove</button>
+                      </div>
+                      <div className="cart-item-qty">
+                        <label>Quantity:</label>
+                        <input 
+                          type="text" 
+                          value={item.quantity} 
+                          onChange={(e) => updateQuantity(item.product.name, e.target.value)}
+                          placeholder="e.g., 50 kg or 2 drums"
+                        />
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
+
+              {cart.length > 0 && (
+                <div className="cart-footer">
+                  <p style={{ marginBottom: '10px', fontSize: '14px', color: 'var(--text-secondary)' }}>
+                    Send this order directly to our sales team via WhatsApp for pricing and confirmation:
+                  </p>
+                  <div className="wa-buttons">
+                    <a 
+                      href={generateWhatsAppLink('8369572124')} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="wa-btn"
+                    >
+                      <MessageCircle size={20} /> Send to Chirag (8369572124)
+                    </a>
+                    <a 
+                      href={generateWhatsAppLink('8850351482')} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="wa-btn"
+                    >
+                      <MessageCircle size={20} /> Send to Team (8850351482)
+                    </a>
+                  </div>
+                </div>
+              )}
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
