@@ -66,29 +66,29 @@ const VisitorLogin: React.FC<VisitorLoginProps> = ({ onLoginSuccess }) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="visitor-login-overlay"
+        className="auth-gate-overlay"
       >
         <motion.div
           initial={{ scale: 0.9, y: 20 }}
           animate={{ scale: 1, y: 0 }}
           transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-          className="visitor-login-modal"
+          className="auth-gate-modal"
         >
-          <div className="visitor-login-header-bar"></div>
+          <div className="auth-gate-header-bar"></div>
 
-          <div className="visitor-login-content">
-            <div className="visitor-login-icon-container">
-              <Lock className="visitor-login-icon" />
+          <div className="auth-gate-content">
+            <div className="auth-gate-icon-container">
+              <Lock className="auth-gate-icon" />
             </div>
             
-            <h2 className="visitor-login-title">
+            <h2 className="auth-gate-title">
               Welcome to Moksh Dyes
             </h2>
-            <p className="visitor-login-subtitle">
+            <p className="auth-gate-subtitle">
               Please sign in to access our website.
             </p>
 
-            <div className="visitor-login-button-container">
+            <div className="auth-gate-button-container">
               <GoogleLogin
                 onSuccess={handleSuccess}
                 onError={handleError}
@@ -99,18 +99,18 @@ const VisitorLogin: React.FC<VisitorLoginProps> = ({ onLoginSuccess }) => {
             </div>
 
             {isLoading && (
-              <p className="visitor-login-loading">
+              <p className="auth-gate-loading">
                 Signing you in...
               </p>
             )}
 
             {error && (
-              <p className="visitor-login-error">
+              <p className="auth-gate-error">
                 {error}
               </p>
             )}
             
-            <p className="visitor-login-footer">
+            <p className="auth-gate-footer">
               By signing in, you agree to share your name and email with Moksh Dyes and Chemicals.
             </p>
           </div>

@@ -2306,7 +2306,7 @@ body.dark-theme .mixer-section {
 body.dark-theme .mixer-dashboard {
   background: #141414;
 }
-.visitor-login-overlay {
+.auth-gate-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -2320,7 +2320,7 @@ body.dark-theme .mixer-dashboard {
   backdrop-filter: blur(8px);
 }
 
-.visitor-login-modal {
+.auth-gate-modal {
   background-color: #ffffff;
   border-radius: 1rem;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
@@ -2333,13 +2333,13 @@ body.dark-theme .mixer-dashboard {
 }
 
 @media (prefers-color-scheme: dark) {
-  .visitor-login-modal {
+  .auth-gate-modal {
     background-color: #1e293b;
     color: #ffffff;
   }
 }
 
-.visitor-login-header-bar {
+.auth-gate-header-bar {
   position: absolute;
   top: 0;
   left: 0;
@@ -2348,14 +2348,14 @@ body.dark-theme .mixer-dashboard {
   background: linear-gradient(to right, #3b82f6, #22d3ee);
 }
 
-.visitor-login-content {
+.auth-gate-content {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
 }
 
-.visitor-login-icon-container {
+.auth-gate-icon-container {
   width: 4rem;
   height: 4rem;
   background-color: #dbeafe;
@@ -2367,24 +2367,24 @@ body.dark-theme .mixer-dashboard {
 }
 
 @media (prefers-color-scheme: dark) {
-  .visitor-login-icon-container {
+  .auth-gate-icon-container {
     background-color: rgba(30, 58, 138, 0.3);
   }
 }
 
-.visitor-login-icon {
+.auth-gate-icon {
   width: 2rem;
   height: 2rem;
   color: #2563eb;
 }
 
 @media (prefers-color-scheme: dark) {
-  .visitor-login-icon {
+  .auth-gate-icon {
     color: #60a5fa;
   }
 }
 
-.visitor-login-title {
+.auth-gate-title {
   font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
@@ -2392,36 +2392,36 @@ body.dark-theme .mixer-dashboard {
 }
 
 @media (prefers-color-scheme: dark) {
-  .visitor-login-title {
+  .auth-gate-title {
     color: #ffffff;
   }
 }
 
-.visitor-login-subtitle {
+.auth-gate-subtitle {
   color: #475569;
   margin-bottom: 2rem;
 }
 
 @media (prefers-color-scheme: dark) {
-  .visitor-login-subtitle {
+  .auth-gate-subtitle {
     color: #cbd5e1;
   }
 }
 
-.visitor-login-button-container {
+.auth-gate-button-container {
   width: 100%;
   display: flex;
   justify-content: center;
   margin-bottom: 1rem;
 }
 
-.visitor-login-loading {
+.auth-gate-loading {
   font-size: 0.875rem;
   color: #2563eb;
   margin-top: 1rem;
 }
 
-.visitor-login-error {
+.auth-gate-error {
   font-size: 0.875rem;
   color: #ef4444;
   margin-top: 1rem;
@@ -2432,18 +2432,18 @@ body.dark-theme .mixer-dashboard {
 }
 
 @media (prefers-color-scheme: dark) {
-  .visitor-login-error {
+  .auth-gate-error {
     background-color: rgba(127, 29, 29, 0.2);
   }
 }
 
-.visitor-login-footer {
+.auth-gate-footer {
   font-size: 0.75rem;
   color: #64748b;
   margin-top: 1.5rem;
 }
 
-.visitor-login-custom-btn {
+.auth-gate-custom-btn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2460,17 +2460,17 @@ body.dark-theme .mixer-dashboard {
   box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
 }
 
-.visitor-login-custom-btn:hover {
+.auth-gate-custom-btn:hover {
   background-color: #f8f9fa;
   box-shadow: 0 1px 3px 0 rgba(60, 64, 67, 0.3), 0 4px 8px 3px rgba(60, 64, 67, 0.15);
 }
 
-.visitor-login-custom-btn:disabled {
+.auth-gate-custom-btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
 
-.visitor-login-google-logo {
+.auth-gate-google-logo {
   width: 18px;
   height: 18px;
   margin-right: 12px;
