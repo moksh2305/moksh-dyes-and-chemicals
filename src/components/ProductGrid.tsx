@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShoppingCart, X, MessageCircle } from 'lucide-react';
+import { ShoppingCart, X, MessageCircle, Download, Share2 } from 'lucide-react';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 import './ShoppingCart.css';
 
 const products = [
@@ -99,20 +101,72 @@ const ProductGrid: React.FC = () => {
     return `https://wa.me/91${phone}?text=${encodeURIComponent(text)}`;
   };
 
+  const getShareLink = (productName: string) => {
+    const text = `Sir, please check this dye from Moksh Dyes. It matches our requirements: ${productName}.\n\nView complete catalog at: https://moksh-dyes-and-chemicals.vercel.app`;
+    return `https://wa.me/?text=${encodeURIComponent(text)}`;
+  };
+
+  const generatePDFCatalog = () => {
+    const doc = new jsPDF();
+    
+    // Header
+    doc.setFontSize(22);
+    doc.setTextColor(184, 134, 11); // Gold color
+    doc.text('Moksh Dyes & Chemicals', 14, 20);
+    
+    doc.setFontSize(14);
+    doc.setTextColor(50, 50, 50);
+    doc.text('Premium Product Catalog', 14, 30);
+    
+    doc.setFontSize(10);
+    doc.text('Website: https://moksh-dyes-and-chemicals.vercel.app', 14, 38);
+    doc.text('Phone: +91 8369572124 / 8850351482', 14, 44);
+
+    const tableData = products.map(p => [
+      p.name,
+      tagLabels[p.cat],
+      p.desc
+    ]);
+
+    autoTable(doc, {
+      startY: 50,
+      head: [['Product Name', 'Category', 'Description']],
+      body: tableData,
+      theme: 'grid',
+      headStyles: { fillColor: [26, 15, 10], textColor: [255, 255, 255] },
+      styles: { fontSize: 10, cellPadding: 4 },
+      columnStyles: {
+        0: { fontStyle: 'bold', cellWidth: 40 },
+        1: { cellWidth: 30 },
+        2: { cellWidth: 'auto' }
+      }
+    });
+    
+    doc.save('Moksh_Dyes_Catalog.pdf');
+  };
+
   return (
     <div id="products">
       <div className="section-wrap">
-        <motion.div 
-          className="section-header"
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <span className="eyebrow">Our Range</span>
-          <h2>Product Collection</h2>
-          <p>Filter by dye category and add products to your inquiry order</p>
-        </motion.div>
+        <div className="catalog-header-flex">
+          <motion.div 
+            className="section-header"
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            style={{ textAlign: 'left', marginBottom: '2rem' }}
+          >
+            <span className="eyebrow">Our Range</span>
+            <h2 style={{ marginBottom: 0 }}>Product Collection</h2>
+            <p>Filter by dye category and add products to your inquiry order</p>
+          </motion.div>
+
+          <button className="download-catalog-btn" onClick={generatePDFCatalog}>
+            <Download size={18} />
+            Download PDF Catalog
+          </button>
+        </div>
 
         <div className="tabs">
           <button className={`tab-btn ${filter === 'all' ? 'active' : ''}`} onClick={() => setFilter('all')}>All Products</button>
@@ -142,9 +196,20 @@ const ProductGrid: React.FC = () => {
                   <div className="card-hover-info">{p.desc}</div>
                   <span className={`card-tag ${tagClasses[p.cat]}`}>{tagLabels[p.cat]}</span>
                   
-                  <button className="add-to-cart-btn" onClick={() => addToCart(p)}>
-                    + Add to Order
-                  </button>
+                  <div className="card-actions">
+                    <button className="add-to-cart-btn" onClick={() => addToCart(p)}>
+                      + Add to Order
+                    </button>
+                    <a 
+                      href={getShareLink(p.name)} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="share-btn"
+                      title="Share to Manager via WhatsApp"
+                    >
+                      <Share2 size={16} />
+                    </a>
+                  </div>
                 </div>
               </motion.div>
             ))}
