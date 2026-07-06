@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ShoppingCart, X, MessageCircle, Download, Share2 } from 'lucide-react';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
-import './ShoppingCart.css';
+import './OrderModule.css';
 
 const products = [
   { name: "Black BB", cat: "vat", color: "#1a1a2e", desc: "Deep jet black VAT dye with excellent wash and light fastness." },
@@ -197,7 +197,7 @@ const ProductGrid: React.FC = () => {
                   <span className={`card-tag ${tagClasses[p.cat]}`}>{tagLabels[p.cat]}</span>
                   
                   <div className="card-actions">
-                    <button className="add-to-cart-btn" onClick={() => addToCart(p)}>
+                    <button className="add-to-order-btn" onClick={() => addToCart(p)}>
                       + Add to Order
                     </button>
                     <a 
@@ -221,7 +221,7 @@ const ProductGrid: React.FC = () => {
       <AnimatePresence>
         {cart.length > 0 && (
           <motion.button 
-            className="cart-floating-btn"
+            className="order-floating-btn"
             onClick={() => setIsCartOpen(true)}
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -240,39 +240,39 @@ const ProductGrid: React.FC = () => {
         {isCartOpen && (
           <>
             <motion.div 
-              className="cart-overlay"
+              className="order-overlay"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsCartOpen(false)}
             />
             <motion.div 
-              className="cart-sidebar"
+              className="order-sidebar"
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
             >
-              <div className="cart-header">
+              <div className="order-header">
                 <h3>Order Inquiry</h3>
-                <button className="close-cart" onClick={() => setIsCartOpen(false)}>
+                <button className="close-order" onClick={() => setIsCartOpen(false)}>
                   <X size={24} />
                 </button>
               </div>
 
-              <div className="cart-items">
+              <div className="order-items">
                 {cart.length === 0 ? (
-                  <div className="empty-cart">
+                  <div className="empty-order">
                     <p>Your order list is empty.</p>
                   </div>
                 ) : (
                   cart.map((item, idx) => (
-                    <div className="cart-item" key={idx}>
-                      <div className="cart-item-header">
-                        <span className="cart-item-name">{item.product.name}</span>
+                    <div className="order-item" key={idx}>
+                      <div className="order-item-header">
+                        <span className="order-item-name">{item.product.name}</span>
                         <button className="remove-item" onClick={() => removeFromCart(item.product.name)}>Remove</button>
                       </div>
-                      <div className="cart-item-qty">
+                      <div className="order-item-qty">
                         <label>Quantity:</label>
                         <input 
                           type="text" 
@@ -287,7 +287,7 @@ const ProductGrid: React.FC = () => {
               </div>
 
               {cart.length > 0 && (
-                <div className="cart-footer">
+                <div className="order-footer">
                   <p style={{ marginBottom: '10px', fontSize: '14px', color: 'var(--text-secondary)' }}>
                     Send this order directly to our sales team via WhatsApp for pricing and confirmation:
                   </p>
