@@ -71,6 +71,17 @@ const Hero: React.FC = () => {
       >
         <div className="hero-proprietor-label">Proprietor</div>
         <div className="hero-proprietor-name">Chirag K Shah</div>
+        <div style={{ 
+          marginTop: '12px', 
+          fontSize: '1.1rem', 
+          color: 'var(--gold-lt)', 
+          fontFamily: '"Cormorant Garamond", serif', 
+          fontStyle: 'italic',
+          letterSpacing: '0.02em',
+          opacity: 0.8
+        }}>
+          Trusted by customers for 30+ Years
+        </div>
       </motion.div>
 
       <motion.button
