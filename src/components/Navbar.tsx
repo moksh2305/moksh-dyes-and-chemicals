@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Download } from 'lucide-react';
+import { generatePDFCatalog } from '../utils/pdfGenerator';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,10 +24,35 @@ const Navbar: React.FC = () => {
         <a className="nav-logo" href="#" onClick={(e) => scrollToSection(e, 'top')}>
           Moksh <span>Dyes & Chemicals</span>
         </a>
-        <ul className="nav-links">
+        <ul className="nav-links" style={{ alignItems: 'center' }}>
           <li><a href="#products" onClick={(e) => scrollToSection(e, 'products')}>Products</a></li>
           <li><a href="#dye-guide" onClick={(e) => scrollToSection(e, 'dye-guide')}>Dye Guide</a></li>
           <li><a href="#about" onClick={(e) => scrollToSection(e, 'about')}>About</a></li>
+          <li>
+            <motion.button 
+              onClick={generatePDFCatalog}
+              whileHover={{ scale: 1.05, boxShadow: "0px 4px 10px rgba(184, 134, 11, 0.2)" }}
+              whileTap={{ scale: 0.95 }}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                background: 'transparent',
+                color: '#b8860b',
+                border: '1px solid #b8860b',
+                padding: '6px 14px',
+                borderRadius: '6px',
+                fontFamily: '"DM Sans", sans-serif',
+                fontWeight: 600,
+                fontSize: '0.8rem',
+                textTransform: 'uppercase',
+                cursor: 'pointer',
+                marginLeft: '5px'
+              }}
+            >
+              <Download size={14} /> Catalog
+            </motion.button>
+          </li>
           <li><a href="#contact" className="nav-cta" onClick={(e) => scrollToSection(e, 'contact')}>Order Now</a></li>
         </ul>
         <button 
