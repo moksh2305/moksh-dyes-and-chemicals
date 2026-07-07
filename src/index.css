@@ -1961,24 +1961,7 @@ body.dark-theme .yield-result-box.highlight {
   background: #1a1a2e;
 }
 
-/* ─────────────── DARK MODE TOGGLE ─────────────── */
-.theme-toggle-btn {
-  position: fixed;
-  bottom: 80px;
-  left: 28px;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.1);
-  border: 1px solid var(--gold-dim);
-  color: var(--gold);
-  font-size: 1.2rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  transition: all 0.3s;
+
 .yield-val-display {
   font-size: 1.1rem;
   font-weight: 600;
