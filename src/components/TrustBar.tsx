@@ -3,7 +3,7 @@ import React from 'react';
 const tickerItems = [
   { label: "Chirag K Shah ", val: "Proprietor & Direct Contact" },
   { label: "Bulk Orders ", val: "All Quantities Welcome" },
-  { label: "Machine Formulated ", val: "M.F Grade Available" },
+  { label: "MicroFine ", val: "M.F Grade Available" },
   { label: "Quality Assured ", val: "Consistent Every Batch" },
   { label: "VAT Dyes ", val: "Premium Cellulosic Series" },
   { label: "Fast Shipping ", val: "Pan India Delivery" },

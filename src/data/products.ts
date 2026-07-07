@@ -13,12 +13,12 @@ export const products = [
   { name: "Blue B Base", cat: "base", color: "#1565c0", desc: "Coupling base component for developing deep, rich navy blue shades." },
   { name: "Brown 3G", cat: "vat", color: "#795548", desc: "Warm brown VAT dye with a greenish undertone." },
   { name: "Brown BR", cat: "vat", color: "#6d4c41", desc: "Reddish-brown VAT dye with strong fastness." },
-  { name: "Golden Orange G", cat: "vat", color: "#e65100", desc: "Machine formulated golden orange VAT dye." },
+  { name: "Golden Orange G", cat: "vat", color: "#e65100", desc: "MicroFine golden orange VAT dye." },
   { name: "Brown RRD", cat: "vat", color: "#7b3f00", desc: "Deep reddish-brown with durable shade retention." },
   { name: "Brown 2G", cat: "vat", color: "#8d6e63", desc: "Greenish-brown VAT dye for medium shades." },
   { name: "Brown R", cat: "vat", color: "#a0522d", desc: "Classic reddish-brown VAT dye." },
   { name: "Orange RRT", cat: "vat", color: "#f57c00", desc: "VAT orange with reddish undertone." },
-  { name: "VAT Brown 2G", cat: "vat", color: "#8b5e3c", desc: "Machine formulated VAT Brown 2G for even dyeing." },
+  { name: "VAT Brown 2G", cat: "vat", color: "#8b5e3c", desc: "MicroFine VAT Brown 2G for even dyeing." },
   { name: "VAT Indigo Blue", cat: "vat", color: "#283593", desc: "Classic indigo blue — premium denim grade." },
   { name: "VAT Blue 4G", cat: "vat", color: "#1976d2", desc: "Bright blue VAT dye with a greenish tint." },
   { name: "Brown G", cat: "vat", color: "#78564a", desc: "Neutral warm brown, VAT quality." },
@@ -36,7 +36,7 @@ export const products = [
   { name: "Dark Blue BO", cat: "vat", color: "#1a237e", desc: "Dark blue-on-black VAT dye." },
   { name: "VAT Blue BC", cat: "vat", color: "#0d47a1", desc: "Standard bright blue VAT carrier." },
   { name: "P Green", cat: "vat", color: "#388e3c", desc: "Pigment-grade green VAT dye." },
-  { name: "Brown 2G", cat: "vat", color: "#8d6348", desc: "Machine formulated Brown 2G for even dyeing." },
+  { name: "Brown 2G", cat: "vat", color: "#8d6348", desc: "MicroFine Brown 2G for even dyeing." },
 ];
 
 export const tagLabels: Record<string, string> = {

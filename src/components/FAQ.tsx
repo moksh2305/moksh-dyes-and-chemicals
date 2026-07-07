@@ -20,7 +20,7 @@ const faqData = [
   },
   {
     q: "What does 'M.F' mean in some product names?",
-    a: "'M.F' stands for Machine Formulated — these are standardised, pre-blended formulations designed for consistency in automated or large-scale dyeing processes. They ensure even shade distribution across the batch with minimal manual adjustment."
+    a: "'M.F' stands for MicroFine — these are highly refined, micro-pulverized formulations designed for superior solubility and consistency in automated or large-scale dyeing processes. They ensure even shade distribution across the batch."
   },
   {
     q: "What are your working hours?",

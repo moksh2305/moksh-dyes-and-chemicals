@@ -245,8 +245,8 @@ const OrderProcess: React.FC = () => {
             </div>
             <div className="dyk-card">
               <div className="dyk-num">04</div>
-              <div className="dyk-title">"M.F" Means Machine Formulated</div>
-              <div className="dyk-text">Products labelled M.F are pre-standardised blends engineered for automated dyeing lines...</div>
+              <div className="dyk-title">"M.F" Means MicroFine</div>
+              <div className="dyk-text">Products labelled M.F are highly refined, micro-pulverized blends engineered for superior solubility and consistency in dyeing...</div>
             </div>
             <div className="dyk-card">
               <div className="dyk-num">05</div>
