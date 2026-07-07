@@ -162,10 +162,31 @@ const ProductGrid: React.FC = () => {
             <p>Filter by dye category and add products to your inquiry order</p>
           </motion.div>
 
-          <button className="download-catalog-btn" onClick={generatePDFCatalog}>
-            <Download size={18} />
+          <motion.button 
+            onClick={generatePDFCatalog}
+            whileHover={{ scale: 1.05, boxShadow: "0px 10px 20px rgba(184, 134, 11, 0.3)" }}
+            whileTap={{ scale: 0.95 }}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '10px',
+              background: 'linear-gradient(135deg, #1a0f0a 0%, #2c2016 100%)',
+              color: '#e8c96a',
+              border: '1px solid rgba(184, 134, 11, 0.4)',
+              padding: '12px 28px',
+              borderRadius: '8px',
+              fontFamily: '"DM Sans", sans-serif',
+              fontWeight: 600,
+              fontSize: '0.95rem',
+              letterSpacing: '0.05em',
+              textTransform: 'uppercase',
+              cursor: 'pointer',
+              marginLeft: 'auto'
+            }}
+          >
+            <Download size={20} />
             Download PDF Catalog
-          </button>
+          </motion.button>
         </div>
 
         <div className="tabs">
@@ -196,19 +217,53 @@ const ProductGrid: React.FC = () => {
                   <div className="card-hover-info">{p.desc}</div>
                   <span className={`card-tag ${tagClasses[p.cat]}`}>{tagLabels[p.cat]}</span>
                   
-                  <div className="card-actions">
-                    <button className="add-to-order-btn" onClick={() => addToCart(p)}>
+                  <div style={{ display: 'flex', gap: '8px', marginTop: '18px', alignItems: 'stretch' }}>
+                    <motion.button 
+                      onClick={() => addToCart(p)}
+                      whileHover={{ scale: 1.02, backgroundColor: '#b8860b', color: '#1a0f0a' }}
+                      whileTap={{ scale: 0.98 }}
+                      style={{
+                        flex: 1,
+                        padding: '12px 14px',
+                        background: 'transparent',
+                        border: '1px solid #b8860b',
+                        color: '#b8860b',
+                        borderRadius: '6px',
+                        fontFamily: '"DM Sans", sans-serif',
+                        fontSize: '0.85rem',
+                        fontWeight: 700,
+                        letterSpacing: '0.05em',
+                        textTransform: 'uppercase',
+                        cursor: 'pointer',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                      }}
+                    >
                       + Add to Order
-                    </button>
-                    <a 
+                    </motion.button>
+                    <motion.a 
                       href={getShareLink(p.name)} 
                       target="_blank" 
                       rel="noopener noreferrer" 
-                      className="share-btn"
+                      whileHover={{ scale: 1.05, backgroundColor: '#25D366', borderColor: '#25D366', color: '#fff', boxShadow: "0px 8px 15px rgba(37, 211, 102, 0.3)" }}
+                      whileTap={{ scale: 0.95 }}
                       title="Share to Manager via WhatsApp"
+                      style={{
+                        padding: '0 16px',
+                        background: 'transparent',
+                        color: '#2c2016',
+                        border: '1px solid rgba(184, 134, 11, 0.3)',
+                        borderRadius: '6px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        cursor: 'pointer',
+                        textDecoration: 'none'
+                      }}
                     >
-                      <Share2 size={16} />
-                    </a>
+                      <Share2 size={18} />
+                    </motion.a>
                   </div>
                 </div>
               </motion.div>
