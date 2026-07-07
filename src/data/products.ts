@@ -4,6 +4,7 @@ export const products = [
   { name: "Golden Yellow GK", cat: "vat", color: "#e8b400", desc: "Warm golden shade with excellent build-up on cotton." },
   { name: "Golden Yellow RK", cat: "vat", color: "#d4a017", desc: "Rich golden yellow with a reddish undertone." },
   { name: "Magenta", cat: "vat", color: "#c2185b", desc: "Vivid magenta VAT dye for cellulosic fibres." },
+  { name: "Green XBN", cat: "vat", color: "#009966", desc: "Brilliant jade-green VAT dye with excellent colour fastness." },
   { name: "Green 2G", cat: "vat", color: "#2e7d32", desc: "Stable green VAT dye with good fastness properties." },
   { name: "VAT Pink R", cat: "vat", color: "#e91e8c", desc: "Soft pink VAT dye with consistent shade development." },
   { name: "Black AC", cat: "vat", color: "#0d0d0d", desc: "Alternative carbon black VAT dye for deep shades." },
@@ -18,7 +19,6 @@ export const products = [
   { name: "Brown 2G", cat: "vat", color: "#8d6e63", desc: "Greenish-brown VAT dye for medium shades." },
   { name: "Brown R", cat: "vat", color: "#a0522d", desc: "Classic reddish-brown VAT dye." },
   { name: "Orange RRT", cat: "vat", color: "#f57c00", desc: "VAT orange with reddish undertone." },
-  { name: "VAT Brown 2G", cat: "vat", color: "#8b5e3c", desc: "MicroFine VAT Brown 2G for even dyeing." },
   { name: "VAT Indigo Blue", cat: "vat", color: "#283593", desc: "Classic indigo blue — premium denim grade." },
   { name: "VAT Blue 4G", cat: "vat", color: "#1976d2", desc: "Bright blue VAT dye with a greenish tint." },
   { name: "Brown G", cat: "vat", color: "#78564a", desc: "Neutral warm brown, VAT quality." },
@@ -27,7 +27,6 @@ export const products = [
   { name: "Purple Violet 4R", cat: "vat", color: "#6a1b9a", desc: "Deep purple vat dye for cotton." },
   { name: "Olive D", cat: "vat", color: "#7a7a2a", desc: "Distinct olive VAT dye shade." },
   { name: "Violet RR", cat: "vat", color: "#7b1fa2", desc: "Rich reddish-violet vat dye." },
-  { name: "Pink R", cat: "vat", color: "#e91e63", desc: "Bright vat pink for cellulosic fibres." },
   { name: "Black CH", cat: "vat", color: "#212121", desc: "Cold hue black VAT dye." },
   { name: "Vat Grey 2B", cat: "vat", color: "#607d8b", desc: "Bluish grey VAT dye." },
   { name: "Blue 3R", cat: "vat", color: "#1e88e5", desc: "VAT blue with a reddish cast." },
@@ -36,7 +35,6 @@ export const products = [
   { name: "Dark Blue BO", cat: "vat", color: "#1a237e", desc: "Dark blue-on-black VAT dye." },
   { name: "VAT Blue BC", cat: "vat", color: "#0d47a1", desc: "Standard bright blue VAT carrier." },
   { name: "P Green", cat: "vat", color: "#388e3c", desc: "Pigment-grade green VAT dye." },
-  { name: "Brown 2G", cat: "vat", color: "#8d6348", desc: "MicroFine Brown 2G for even dyeing." },
 ];
 
 export const tagLabels: Record<string, string> = {
