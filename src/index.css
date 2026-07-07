@@ -1715,13 +1715,16 @@
         .sticky-call {
           display: flex;
         }
+        .yield-grid {
+          grid-template-columns: 1fr;
+        }
       }
       @media (max-width: 560px) {
         .dye-guide-grid {
           grid-template-columns: 1fr;
         }
         .product-grid {
-          grid-template-columns: repeat(2, 1fr);
+          grid-template-columns: 1fr;
         }
         .about-stats {
           grid-template-columns: 1fr 1fr;
@@ -1734,7 +1737,7 @@
           grid-template-columns: 1fr;
         }
         .finder-options {
-          grid-template-columns: 1fr 1fr;
+          grid-template-columns: 1fr;
         }
         .sticky-call {
           padding: 10px 1rem;

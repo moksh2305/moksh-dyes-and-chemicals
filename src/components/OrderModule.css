@@ -280,3 +280,12 @@
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(184, 134, 11, 0.4);
 }
+
+@media (max-width: 768px) {
+  .order-floating-btn {
+    bottom: 80px; /* Above the sticky-call bar */
+    right: 20px;
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+}
