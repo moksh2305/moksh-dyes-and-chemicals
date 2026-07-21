@@ -1,28 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { motion, useInView, useMotionValue, useSpring } from 'framer-motion';
-
-const AnimatedCounter: React.FC<{ value: number; suffix?: string; prefix?: string }> = ({ value, suffix = "", prefix = "" }) => {
-  const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
-  const motionValue = useMotionValue(0);
-  const springValue = useSpring(motionValue, { stiffness: 40, damping: 15, mass: 1 });
-  const [displayValue, setDisplayValue] = useState("0");
-
-  useEffect(() => {
-    if (isInView) {
-      motionValue.set(value);
-    }
-  }, [isInView, value, motionValue]);
-
-  useEffect(() => {
-    const unsubscribe = springValue.on("change", (latest) => {
-      setDisplayValue(Math.floor(latest).toLocaleString());
-    });
-    return unsubscribe;
-  }, [springValue]);
-
-  return <span ref={ref}>{prefix}{displayValue}{suffix}</span>;
-};
+import React from 'react';
+import { motion } from 'framer-motion';
 
 const About: React.FC = () => {
   return (
@@ -48,29 +25,6 @@ const About: React.FC = () => {
             dyes for the azoic coupling system — with consistent supply and
             assured quality on every order.
           </p>
-        </div>
-        
-        <div className="about-stats premium-stats">
-          <div className="stat">
-            <div className="stat-num"><AnimatedCounter value={30} suffix="+" /></div>
-            <div className="stat-label">Years Experience</div>
-          </div>
-          <div className="stat">
-            <div className="stat-num"><AnimatedCounter value={250} suffix="+" /></div>
-            <div className="stat-label">Business Clients</div>
-          </div>
-          <div className="stat">
-            <div className="stat-num"><AnimatedCounter value={18} suffix="+" /></div>
-            <div className="stat-label">States Supplied</div>
-          </div>
-          <div className="stat">
-            <div className="stat-num"><AnimatedCounter value={2000} suffix="+" /></div>
-            <div className="stat-label">Orders Delivered</div>
-          </div>
-          <div className="stat">
-            <div className="stat-num"><AnimatedCounter value={99} suffix="%" /></div>
-            <div className="stat-label">Repeat Customers</div>
-          </div>
         </div>
 
         <div className="serving-section">

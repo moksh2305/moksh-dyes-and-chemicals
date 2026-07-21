@@ -1,5 +1,28 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useRef, useState } from 'react';
+import { motion, useInView, useMotionValue, useSpring } from 'framer-motion';
+
+const AnimatedCounter: React.FC<{ value: number; suffix?: string; prefix?: string }> = ({ value, suffix = "", prefix = "" }) => {
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const motionValue = useMotionValue(0);
+  const springValue = useSpring(motionValue, { stiffness: 40, damping: 15, mass: 1 });
+  const [displayValue, setDisplayValue] = useState("0");
+
+  useEffect(() => {
+    if (isInView) {
+      motionValue.set(value);
+    }
+  }, [isInView, value, motionValue]);
+
+  useEffect(() => {
+    const unsubscribe = springValue.on("change", (latest) => {
+      setDisplayValue(Math.floor(latest).toLocaleString());
+    });
+    return unsubscribe;
+  }, [springValue]);
+
+  return <span ref={ref}>{prefix}{displayValue}{suffix}</span>;
+};
 
 const Hero: React.FC = () => {
   const scrollToProducts = () => {
@@ -71,16 +94,24 @@ const Hero: React.FC = () => {
       >
         <div className="hero-proprietor-label">Proprietor</div>
         <div className="hero-proprietor-name">Chirag K Shah</div>
-        <div style={{ 
-          marginTop: '12px', 
-          fontSize: '1.1rem', 
-          color: 'var(--gold-lt)', 
-          fontFamily: '"Cormorant Garamond", serif', 
-          fontStyle: 'italic',
-          letterSpacing: '0.02em',
-          opacity: 0.8
-        }}>
-          Trusted by customers for 30+ Years
+        
+        <div className="premium-stats hero-stats">
+          <div className="stat">
+            <div className="stat-num"><AnimatedCounter value={30} suffix="+" /></div>
+            <div className="stat-label">Years Experience</div>
+          </div>
+          <div className="stat">
+            <div className="stat-num"><AnimatedCounter value={120} suffix="+" /></div>
+            <div className="stat-label">Business Clients</div>
+          </div>
+          <div className="stat">
+            <div className="stat-num"><AnimatedCounter value={18} suffix="+" /></div>
+            <div className="stat-label">States Supplied</div>
+          </div>
+          <div className="stat">
+            <div className="stat-num"><AnimatedCounter value={99} suffix="%" /></div>
+            <div className="stat-label">Repeat Customers</div>
+          </div>
         </div>
       </motion.div>
 

@@ -2500,6 +2500,35 @@ body.dark-theme .mixer-dashboard {
   text-align: center;
 }
 
+/* ── HERO STATS ── */
+.hero-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem 3rem;
+  border-top: none;
+  padding-top: 1rem;
+  margin-top: 2.5rem;
+}
+
+.hero-stats .stat {
+  align-items: flex-start;
+  border-left: 2px solid var(--gold);
+  padding-left: 1.5rem;
+  min-width: unset;
+}
+
+.hero-stats .stat-label {
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 560px) {
+  .hero-stats {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
 .serving-section {
   margin-top: 4rem;
   text-align: center;
