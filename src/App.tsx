@@ -3,6 +3,7 @@ import AnnouncementBar from './components/AnnouncementBar';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import TrustBar from './components/TrustBar';
+import SmartSearch from './components/SmartSearch';
 import DyeGuide from './components/DyeGuide';
 import ProductGrid from './components/ProductGrid';
 import OrderProcess from './components/OrderProcess';
@@ -43,6 +44,7 @@ const App: React.FC = () => {
       <AnnouncementBar />
       <Navbar />
       <Hero />
+      <SmartSearch />
       <TrustBar />
       <DyeGuide />
       <ProductGrid />
