@@ -60,25 +60,58 @@ const ScreenshotProtection: React.FC = () => {
     };
   }, []);
 
-  if (!isBlackedOut) return null;
-
   return (
-    <div style={{
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      width: '100vw',
-      height: '100vh',
-      backgroundColor: 'black',
-      zIndex: 2147483647, // Max z-index
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      color: 'white',
-      fontFamily: 'sans-serif'
-    }}>
-      <p style={{ opacity: 0.1 }}>Protected Content</p>
-    </div>
+    <>
+      {/* Watermark that is always visible but doesn't interfere with clicks */}
+      <div style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100vw',
+        height: '100vh',
+        pointerEvents: 'none',
+        zIndex: 99998,
+        display: 'flex',
+        flexWrap: 'wrap',
+        overflow: 'hidden',
+        opacity: 0.04, // Very subtle, but visible if someone edits contrast
+        transform: 'rotate(-30deg) scale(1.5)',
+        justifyContent: 'center',
+        alignItems: 'center'
+      }}>
+        {Array.from({ length: 150 }).map((_, i) => (
+          <div key={i} style={{ 
+            padding: '40px', 
+            fontSize: '18px', 
+            fontWeight: 'bold', 
+            color: 'black',
+            whiteSpace: 'nowrap' 
+          }}>
+            Moksh Dyes & Chemicals • Protected
+          </div>
+        ))}
+      </div>
+
+      {/* Blackout overlay triggered by shortcuts or blur */}
+      {isBlackedOut && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100vw',
+          height: '100vh',
+          backgroundColor: 'black',
+          zIndex: 99999,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          color: 'white',
+          fontFamily: 'sans-serif'
+        }}>
+          <p style={{ opacity: 0.1 }}>Protected Content</p>
+        </div>
+      )}
+    </>
   );
 };
 
