@@ -8,6 +8,7 @@ import DyeGuide from './components/DyeGuide';
 import ProductGrid from './components/ProductGrid';
 import OrderProcess from './components/OrderProcess';
 import FAQ from './components/FAQ';
+import ScreenshotProtection from './components/ScreenshotProtection';
 import About from './components/About';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
@@ -38,6 +39,7 @@ const App: React.FC = () => {
 
   return (
     <>
+      <ScreenshotProtection />
       {!isAuthenticated && (
         <VisitorLogin onLoginSuccess={() => setIsAuthenticated(true)} />
       )}
