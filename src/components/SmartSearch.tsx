@@ -180,7 +180,7 @@ const SmartSearch: React.FC = () => {
                         <div className="dye-info">
                           <span className="dye-name">{dye.name}</span>
                         </div>
-                        <a href="#products" className="view-link"><ArrowRight size={16} /></a>
+                        <a href="#products" className="view-link" aria-label="View Product"><ArrowRight size={16} /></a>
                       </div>
                     ))}
                   </div>

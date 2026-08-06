@@ -29,22 +29,92 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "ChemicalsSupplier",
-      "name": "Moksh Dyes & Chemicals",
-      "image": "https://moksh-dyes-and-chemicals.vercel.app/vite.svg",
-      "url": "https://moksh-dyes-and-chemicals.vercel.app/",
-      "telephone": "",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Mumbai",
-        "addressRegion": "Maharashtra",
-        "addressCountry": "IN"
-      },
-      "description": "Premium supplier of VAT dyes, Naphthol dyes, Reactive dyes, and Base dyes in Masjid Bunder, Mumbai.",
-      "founder": {
-        "@type": "Person",
-        "name": "Chirag K Shah"
-      }
+      "@graph": [
+        {
+          "@type": "LocalBusiness",
+          "@id": "https://moksh-dyes-and-chemicals.vercel.app/#organization",
+          "name": "Moksh Dyes & Chemicals",
+          "image": "https://moksh-dyes-and-chemicals.vercel.app/vite.svg",
+          "url": "https://moksh-dyes-and-chemicals.vercel.app/",
+          "telephone": "+91-9820098200",
+          "email": "contact@mokshdyes.com",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Masjid Bunder",
+            "addressLocality": "Mumbai",
+            "addressRegion": "Maharashtra",
+            "postalCode": "400003",
+            "addressCountry": "IN"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "18.9519",
+            "longitude": "72.8378"
+          },
+          "description": "Moksh Dyes & Chemicals is a premium supplier of VAT dyes, Naphthol dyes, Reactive dyes, and Base dyes to the global textile and fabric industry, located in Masjid Bunder, Mumbai.",
+          "founder": {
+            "@type": "Person",
+            "name": "Chirag K Shah"
+          },
+          "priceRange": "$$$",
+          "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday"
+            ],
+            "opens": "10:00",
+            "closes": "19:00"
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://moksh-dyes-and-chemicals.vercel.app/#website",
+          "url": "https://moksh-dyes-and-chemicals.vercel.app/",
+          "name": "Moksh Dyes & Chemicals",
+          "description": "Premium Dyes Supplier in Mumbai",
+          "publisher": {
+            "@id": "https://moksh-dyes-and-chemicals.vercel.app/#organization"
+          }
+        },
+        {
+          "@type": "ItemList",
+          "name": "Premium Textile Dyes",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "item": {
+                "@type": "Product",
+                "name": "VAT Dyes",
+                "description": "High fastness VAT dyes for cellulosic fibres."
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "item": {
+                "@type": "Product",
+                "name": "Reactive Dyes",
+                "description": "Vibrant, wash-fast Reactive dyes."
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "item": {
+                "@type": "Product",
+                "name": "Naphthol Dyes",
+                "description": "Deep shade Naphthol dyes."
+              }
+            }
+          ]
+        }
+      ]
     }
     </script>
 

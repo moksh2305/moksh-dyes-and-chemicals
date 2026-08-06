@@ -199,7 +199,7 @@ const ProductGrid: React.FC = () => {
             >
               <div className="order-header">
                 <h3>Order Inquiry</h3>
-                <button className="close-order" onClick={() => setIsCartOpen(false)}>
+                <button className="close-order" onClick={() => setIsCartOpen(false)} aria-label="Close Order">
                   <X size={24} />
                 </button>
               </div>
