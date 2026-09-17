@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import TrustBar from './components/TrustBar';
 import SmartSearch from './components/SmartSearch';
+import FabricAnalyzer from './components/FabricAnalyzer';
 import DyeGuide from './components/DyeGuide';
 import ProductGrid from './components/ProductGrid';
 import OrderProcess from './components/OrderProcess';
@@ -47,6 +48,7 @@ const App: React.FC = () => {
       <Navbar />
       <Hero />
       <SmartSearch />
+      <FabricAnalyzer />
       <TrustBar />
       <DyeGuide />
       <ProductGrid />
