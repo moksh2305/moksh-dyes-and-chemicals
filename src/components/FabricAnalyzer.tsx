@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Camera, Upload, AlertTriangle, FlaskConical, ArrowRight } from 'lucide-react';
+import './FabricAnalyzer.css';
 
 type FabricType = 'Cotton' | 'Viscose' | 'Silk' | 'Polyester' | 'Linen';
 
