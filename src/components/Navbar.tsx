@@ -25,9 +25,9 @@ const Navbar: React.FC = () => {
           Moksh <span>Dyes & Chemicals</span>
         </a>
         <ul className="nav-links" style={{ alignItems: 'center' }}>
-          <li><a href="#products" onClick={(e) => scrollToSection(e, 'products')}>Products</a></li>
           <li><a href="#fabric-analyzer" onClick={(e) => scrollToSection(e, 'fabric-analyzer')}>Smart Lab</a></li>
           <li><a href="#dye-guide" onClick={(e) => scrollToSection(e, 'dye-guide')}>Dye Guide</a></li>
+          <li><a href="#products" onClick={(e) => scrollToSection(e, 'products')}>Products</a></li>
           <li><a href="#about" onClick={(e) => scrollToSection(e, 'about')}>About</a></li>
           <li><a href="#contact" onClick={(e) => scrollToSection(e, 'contact')}>Contact</a></li>
           <li>
@@ -78,21 +78,6 @@ const Navbar: React.FC = () => {
             style={{ display: 'flex' }}
           >
             <div className="mobile-nav-section">
-              <div className="mobile-nav-label">Browse Products</div>
-              <a href="#products" onClick={(e) => scrollToSection(e, 'products')}>
-                <span className="mobile-nav-icon">🎨</span>All Products
-              </a>
-              <a href="#products" onClick={(e) => scrollToSection(e, 'products')}>
-                <span className="mobile-nav-icon">🟢</span>VAT Dyes
-              </a>
-              <a href="#products" onClick={(e) => scrollToSection(e, 'products')}>
-                <span className="mobile-nav-icon">🟠</span>Naphthol Dyes
-              </a>
-              <a href="#products" onClick={(e) => scrollToSection(e, 'products')}>
-                <span className="mobile-nav-icon">🔵</span>Reactive Dyes
-              </a>
-            </div>
-            <div className="mobile-nav-section">
               <div className="mobile-nav-label">Learn & Tools</div>
               <a href="#fabric-analyzer" onClick={(e) => scrollToSection(e, 'fabric-analyzer')}>
                 <span className="mobile-nav-icon">🔬</span>Smart Lab
@@ -105,6 +90,21 @@ const Navbar: React.FC = () => {
               </a>
               <a href="#faq" onClick={(e) => scrollToSection(e, 'faq')}>
                 <span className="mobile-nav-icon">❓</span>FAQ
+              </a>
+            </div>
+            <div className="mobile-nav-section">
+              <div className="mobile-nav-label">Browse Products</div>
+              <a href="#products" onClick={(e) => scrollToSection(e, 'products')}>
+                <span className="mobile-nav-icon">🎨</span>All Products
+              </a>
+              <a href="#products" onClick={(e) => scrollToSection(e, 'products')}>
+                <span className="mobile-nav-icon">🟢</span>VAT Dyes
+              </a>
+              <a href="#products" onClick={(e) => scrollToSection(e, 'products')}>
+                <span className="mobile-nav-icon">🟠</span>Naphthol Dyes
+              </a>
+              <a href="#products" onClick={(e) => scrollToSection(e, 'products')}>
+                <span className="mobile-nav-icon">🔵</span>Reactive Dyes
               </a>
             </div>
             <div className="mobile-nav-section">
