@@ -26,8 +26,10 @@ const Navbar: React.FC = () => {
         </a>
         <ul className="nav-links" style={{ alignItems: 'center' }}>
           <li><a href="#products" onClick={(e) => scrollToSection(e, 'products')}>Products</a></li>
+          <li><a href="#fabric-analyzer" onClick={(e) => scrollToSection(e, 'fabric-analyzer')}>Smart Lab</a></li>
           <li><a href="#dye-guide" onClick={(e) => scrollToSection(e, 'dye-guide')}>Dye Guide</a></li>
           <li><a href="#about" onClick={(e) => scrollToSection(e, 'about')}>About</a></li>
+          <li><a href="#contact" onClick={(e) => scrollToSection(e, 'contact')}>Contact</a></li>
           <li>
             <motion.button 
               onClick={generatePDFCatalog}
@@ -91,7 +93,10 @@ const Navbar: React.FC = () => {
               </a>
             </div>
             <div className="mobile-nav-section">
-              <div className="mobile-nav-label">Learn</div>
+              <div className="mobile-nav-label">Learn & Tools</div>
+              <a href="#fabric-analyzer" onClick={(e) => scrollToSection(e, 'fabric-analyzer')}>
+                <span className="mobile-nav-icon">🔬</span>Smart Lab
+              </a>
               <a href="#dye-guide" onClick={(e) => scrollToSection(e, 'dye-guide')}>
                 <span className="mobile-nav-icon">📖</span>Dye Guide
               </a>
