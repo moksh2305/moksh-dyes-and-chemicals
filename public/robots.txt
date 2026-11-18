@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /admin
 
 Sitemap: https://moksh-dyes-and-chemicals.vercel.app/sitemap.xml

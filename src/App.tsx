@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, lazy, useEffect, useState } from 'react';
 import AnnouncementBar from './components/AnnouncementBar';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -20,23 +20,62 @@ import VisitorLogin from './components/VisitorLogin';
 import { AnimatePresence, motion } from 'framer-motion';
 import './index.css';
 
+const AdminPage = lazy(() => import('./components/AdminPage'));
+
+const isAdminPath = () => {
+  const path = window.location.pathname.replace(/\/+$/, '').toLowerCase();
+  return path === '/admin';
+};
+
 const App: React.FC = () => {
+  const [onAdminRoute, setOnAdminRoute] = useState<boolean>(isAdminPath);
   const [showBackTop, setShowBackTop] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
     return sessionStorage.getItem('visitor_authenticated') === 'true';
   });
 
   useEffect(() => {
+    const handlePopState = () => setOnAdminRoute(isAdminPath());
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  useEffect(() => {
+    if (onAdminRoute) return;
     const handleScroll = () => {
       setShowBackTop(window.scrollY > 400);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [onAdminRoute]);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  if (onAdminRoute) {
+    return (
+      <Suspense
+        fallback={
+          <div
+            style={{
+              minHeight: '100vh',
+              background: '#120c08',
+              color: '#e8c96a',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontFamily: '"DM Sans", sans-serif',
+            }}
+          >
+            Loading...
+          </div>
+        }
+      >
+        <AdminPage />
+      </Suspense>
+    );
+  }
 
   return (
     <>
