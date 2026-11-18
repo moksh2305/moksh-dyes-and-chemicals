@@ -82,6 +82,13 @@ const AdminPage: React.FC = () => {
   const [toast, setToast] = useState<ToastState | null>(null);
   const toastTimerRef = useRef<number | null>(null);
   const newlyAddedIdRef = useRef<string | null>(null);
+  const autoSaveTimerRef = useRef<number | null>(null);
+  const saveVersionRef = useRef<number>(0);
+  const itemsRef = useRef<StockItem[]>([]);
+
+  useEffect(() => {
+    itemsRef.current = items;
+  }, [items]);
 
   // Set page title & noindex meta tag while on /admin
   useEffect(() => {
@@ -125,6 +132,44 @@ const AdminPage: React.FC = () => {
     window.addEventListener('beforeunload', handleBeforeUnload);
     return () => window.removeEventListener('beforeunload', handleBeforeUnload);
   }, [isUnlocked, scriptUrl, hasUnsavedCloud]);
+
+  // Auto-refresh from Google Sheets when returning to this tab on another device
+  useEffect(() => {
+    const handleVisibilityChange = async () => {
+      if (
+        document.visibilityState !== 'visible' ||
+        !isUnlocked ||
+        !scriptUrl ||
+        !activePasscode ||
+        hasUnsavedCloud ||
+        isSyncing ||
+        autoSaveTimerRef.current !== null
+      ) {
+        return;
+      }
+
+      const res = await fetchStockFromSheet(scriptUrl, activePasscode);
+      if (res.ok && !res.isEmpty && res.items && res.items.length > 0) {
+        // Only apply if user hasn't started editing while fetch was in flight
+        if (autoSaveTimerRef.current === null) {
+          setItems(res.items);
+          saveLocalStockItems(res.items);
+          if (res.syncedAt) setLastSyncedAt(res.syncedAt);
+        }
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, [isUnlocked, scriptUrl, activePasscode, hasUnsavedCloud, isSyncing]);
+
+  // Clean up timers on unmount
+  useEffect(() => {
+    return () => {
+      if (autoSaveTimerRef.current) window.clearTimeout(autoSaveTimerRef.current);
+      if (toastTimerRef.current) window.clearTimeout(toastTimerRef.current);
+    };
+  }, []);
 
   // Auto-restore session within the same browser tab
   useEffect(() => {
@@ -271,6 +316,10 @@ const AdminPage: React.FC = () => {
   };
 
   const handleLock = () => {
+    if (autoSaveTimerRef.current) {
+      window.clearTimeout(autoSaveTimerRef.current);
+      autoSaveTimerRef.current = null;
+    }
     sessionStorage.removeItem(SESSION_PASS_KEY);
     setIsUnlocked(false);
     setActivePasscode('');
@@ -282,11 +331,38 @@ const AdminPage: React.FC = () => {
   const commitItems = (updater: (prev: StockItem[]) => StockItem[]) => {
     setItems((prev) => {
       const next = updater(prev);
+      itemsRef.current = next;
       saveLocalStockItems(next);
       return next;
     });
-    if (scriptUrl) {
+
+    if (scriptUrl && activePasscode) {
       setHasUnsavedCloud(true);
+      const version = ++saveVersionRef.current;
+
+      if (autoSaveTimerRef.current) {
+        window.clearTimeout(autoSaveTimerRef.current);
+      }
+
+      // Auto-save to Google Sheets 1.5s after the last edit so changes reflect everywhere
+      autoSaveTimerRef.current = window.setTimeout(async () => {
+        autoSaveTimerRef.current = null;
+        setIsSyncing(true);
+        const res = await saveStockToSheet(scriptUrl, activePasscode, itemsRef.current);
+        setIsSyncing(false);
+
+        if (res.ok) {
+          if (saveVersionRef.current === version) {
+            setHasUnsavedCloud(false);
+          }
+          if (res.syncedAt) setLastSyncedAt(res.syncedAt);
+        } else {
+          showToast(
+            { message: res.error || 'Auto-sync failed. Click "Save to Sheet" to retry.', isError: true },
+            5000
+          );
+        }
+      }, 1500);
     }
   };
 
@@ -367,20 +443,27 @@ const AdminPage: React.FC = () => {
   };
 
   const handleSaveToCloud = async () => {
+    if (autoSaveTimerRef.current) {
+      window.clearTimeout(autoSaveTimerRef.current);
+      autoSaveTimerRef.current = null;
+    }
     saveLocalStockItems(items);
     if (!scriptUrl) {
       showToast({ message: 'Saved locally in this browser. Connect Google Sheets to sync across devices.' });
       return;
     }
 
+    const version = ++saveVersionRef.current;
     setIsSyncing(true);
     const res = await saveStockToSheet(scriptUrl, activePasscode, items);
     setIsSyncing(false);
 
     if (res.ok) {
-      setHasUnsavedCloud(false);
+      if (saveVersionRef.current === version) {
+        setHasUnsavedCloud(false);
+      }
       if (res.syncedAt) setLastSyncedAt(res.syncedAt);
-      showToast({ message: `Synced ${items.length} items to Google Sheets!` });
+      showToast({ message: `Saved & synced ${items.length} items everywhere!` });
     } else {
       showToast({ message: res.error || 'Failed to sync to Google Sheets.', isError: true }, 6000);
     }
@@ -493,9 +576,7 @@ const AdminPage: React.FC = () => {
       return;
     }
     const defaults = createDefaultStockItems();
-    setItems(defaults);
-    saveLocalStockItems(defaults);
-    if (scriptUrl) setHasUnsavedCloud(true);
+    commitItems(() => defaults);
     showToast({ message: 'Reset to default 36 catalog items.' });
   };
 
