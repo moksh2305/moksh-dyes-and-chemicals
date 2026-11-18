@@ -86,6 +86,9 @@ export const saveLocalStockItems = (items: StockItem[]): void => {
   }
 };
 
+const DEFAULT_STOCK_SCRIPT_URL =
+  'https://script.google.com/macros/s/AKfycbx2JYx0Qmj-ipjmBlvAUkMj-p0VhVxtBZqmKzu3KKwEj2ZH02AHLN5QcSBXYT76eMGk/exec';
+
 export const getStockScriptUrl = (): string => {
   try {
     const localUrl = localStorage.getItem(STORAGE_SCRIPT_URL_KEY);
@@ -94,7 +97,8 @@ export const getStockScriptUrl = (): string => {
     // Ignore storage read errors
   }
   const envUrl = import.meta.env.VITE_STOCK_SCRIPT_URL;
-  return typeof envUrl === 'string' ? envUrl.trim() : '';
+  if (typeof envUrl === 'string' && envUrl.trim()) return envUrl.trim();
+  return DEFAULT_STOCK_SCRIPT_URL;
 };
 
 export const setStockScriptUrl = (url: string): void => {

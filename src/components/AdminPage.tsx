@@ -283,9 +283,20 @@ const AdminPage: React.FC = () => {
       setHasUnsavedCloud(Boolean(res.isEmpty));
 
       if (res.isEmpty) {
-        showToast({
-          message: 'Connected to empty Google Sheet. Click "Save to Sheet" to upload your catalog.',
-        });
+        setIsSyncing(true);
+        const seedRes = await saveStockToSheet(activeUrl, trimmedPass, loaded);
+        setIsSyncing(false);
+        if (seedRes.ok) {
+          setHasUnsavedCloud(false);
+          if (seedRes.syncedAt) setLastSyncedAt(seedRes.syncedAt);
+          showToast({
+            message: `Initialized Google Sheet with ${loaded.length} products! Sync is live across all devices.`,
+          });
+        } else {
+          showToast({
+            message: 'Connected to empty Google Sheet. Click "Save to Sheet" to upload your catalog.',
+          });
+        }
       }
       return;
     }
